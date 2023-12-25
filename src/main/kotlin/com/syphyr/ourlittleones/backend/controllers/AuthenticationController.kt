@@ -1,5 +1,6 @@
 package com.syphyr.ourlittleones.backend.controllers
 
+import com.syphyr.ourlittleones.backend.dtos.request.LoginPayload
 import com.syphyr.ourlittleones.backend.dtos.request.RegisterPayload
 import com.syphyr.ourlittleones.backend.functional.toResponseEntity
 import com.syphyr.ourlittleones.backend.services.AuthenticationService
@@ -22,9 +23,14 @@ class AuthenticationController(private val authenticationService: Authentication
                 .toResponseEntity()
     }
 
-    @GetMapping("/ahmed")
-    fun ahmed():String {
-        return "authenticationService"
+    @PostMapping("/login")
+    fun login(@RequestBody loginPayload: LoginPayload): ResponseEntity<*> {
+        return authenticationService
+                .registerUser(username = registerPayload.username,
+                              password = registerPayload.password,
+                              email = registerPayload.email,
+                              role = registerPayload.role)
+                .toResponseEntity()
     }
 
 //    @PostMapping("/login")

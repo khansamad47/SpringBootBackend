@@ -11,7 +11,7 @@ class ApplicationUser(
         @Column(unique = true)
         private val username: String,
         private val password: String,
-        private val email: String,
+        val email: String,
         @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(
                 name = "user_role_junction",
