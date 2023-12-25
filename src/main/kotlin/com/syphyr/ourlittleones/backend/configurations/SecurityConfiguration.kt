@@ -17,9 +17,13 @@ class SecurityConfiguration {
 
     @Bean
     @Throws(Exception::class)
-    fun filterChain(http:HttpSecurity):SecurityFilterChain{
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http.csrf { it.disable() }
-                .authorizeHttpRequests { it.anyRequest().permitAll() }
+                .authorizeHttpRequests {
+                    it.requestMatchers("/auth/**").permitAll()
+                    it.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                    it.anyRequest().authenticated()
+                }
                 .build()
     }
 
