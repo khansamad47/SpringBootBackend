@@ -1,10 +1,7 @@
 package com.syphyr.ourlittleones.backend.controllers
 
-import com.syphyr.ourlittleones.backend.dtos.request.LoginPayload
 import com.syphyr.ourlittleones.backend.dtos.request.RegisterPayload
-import com.syphyr.ourlittleones.backend.error.toApiError
 import com.syphyr.ourlittleones.backend.extensions.toResponseEntity
-import com.syphyr.ourlittleones.backend.functional.toResponseEntity
 import com.syphyr.ourlittleones.backend.services.AuthenticationService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -16,7 +13,7 @@ class UserController(private val authenticationService: AuthenticationService) {
 
 
     @GetMapping("/")
-    fun getUser(@RequestBody registerPayload: RegisterPayload): ResponseEntity<*> {
+    fun getUser(): ResponseEntity<*> {
         return "han bhaii".toResponseEntity()
     }
 
