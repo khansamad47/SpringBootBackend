@@ -1,4 +1,4 @@
-package com.syphyr.ourlittleones.backend.exceptions
+package com.syphyr.ourlittleones.backend.error
 
 import org.springframework.http.HttpStatus
 

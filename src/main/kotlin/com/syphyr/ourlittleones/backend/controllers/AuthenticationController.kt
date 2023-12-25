@@ -2,6 +2,8 @@ package com.syphyr.ourlittleones.backend.controllers
 
 import com.syphyr.ourlittleones.backend.dtos.request.LoginPayload
 import com.syphyr.ourlittleones.backend.dtos.request.RegisterPayload
+import com.syphyr.ourlittleones.backend.error.toApiError
+import com.syphyr.ourlittleones.backend.extensions.toResponseEntity
 import com.syphyr.ourlittleones.backend.functional.toResponseEntity
 import com.syphyr.ourlittleones.backend.services.AuthenticationService
 import org.springframework.http.ResponseEntity
@@ -15,23 +17,28 @@ class AuthenticationController(private val authenticationService: Authentication
 
     @PostMapping("/register")
     fun registerUser(@RequestBody registerPayload: RegisterPayload): ResponseEntity<*> {
-        return authenticationService
-                .registerUser(username = registerPayload.username,
-                              password = registerPayload.password,
-                              email = registerPayload.email,
-                              role = registerPayload.role)
-                .toResponseEntity()
+        return try {
+            authenticationService
+                    .registerUser(username = registerPayload.username,
+                                  password = registerPayload.password,
+                                  email = registerPayload.email,
+                                  role = registerPayload.role)
+                    .toResponseEntity()
+        } catch (ex: Exception) {
+            val apiError = ex.toApiError()
+            ResponseEntity.status(apiError.status).body(apiError)
+        }
     }
 
-    @PostMapping("/login")
-    fun login(@RequestBody loginPayload: LoginPayload): ResponseEntity<*> {
-        return authenticationService
-                .registerUser(username = registerPayload.username,
-                              password = registerPayload.password,
-                              email = registerPayload.email,
-                              role = registerPayload.role)
-                .toResponseEntity()
-    }
+//    @PostMapping("/login")
+//    fun login(@RequestBody loginPayload: LoginPayload): ResponseEntity<*> {
+//        return authenticationService
+//                .registerUser(username = registerPayload.username,
+//                              password = registerPayload.password,
+//                              email = registerPayload.email,
+//                              role = registerPayload.role)
+//                .toResponseEntity()
+//    }
 
 //    @PostMapping("/login")
 //    fun login(@RequestBody registerDto: RegisterDto): ResponseEntity<*> {

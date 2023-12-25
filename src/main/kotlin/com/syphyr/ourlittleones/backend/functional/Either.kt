@@ -1,6 +1,6 @@
 package com.syphyr.ourlittleones.backend.functional
 
-import com.syphyr.ourlittleones.backend.exceptions.ApiError
+import com.syphyr.ourlittleones.backend.error.ApiError
 import org.springframework.http.ResponseEntity
 
 //Please note that the either class itself doesn't hold any values. Its child classes does.
