@@ -17,17 +17,13 @@ class AuthenticationController(private val authenticationService: Authentication
 
     @PostMapping("/register")
     fun registerUser(@RequestBody registerPayload: RegisterPayload): ResponseEntity<*> {
-        return try {
-            authenticationService
-                    .registerUser(username = registerPayload.username,
-                                  password = registerPayload.password,
-                                  email = registerPayload.email,
-                                  role = registerPayload.role)
-                    .toResponseEntity()
-        } catch (ex: Exception) {
-            val apiError = ex.toApiError()
-            ResponseEntity.status(apiError.status).body(apiError)
-        }
+        return authenticationService
+                .registerUser(username = registerPayload.username,
+                              password = registerPayload.password,
+                              email = registerPayload.email,
+                              role = registerPayload.role)
+                .toResponseEntity()
+
     }
 
 //    @PostMapping("/login")
