@@ -40,7 +40,7 @@ class RefreshTokenService(private val refreshTokenRepository: RefreshTokenReposi
     fun verifyExpiration(token: RefreshToken): RefreshToken {
         if (token.expiryDate < Instant.now()) {
             refreshTokenRepository.delete(token)
-            throw RuntimeException(token.token + " Refresh token is expired. Please make a new login..!")
+            throw RuntimeException(token.token + " Refresh token is expired. Please re-login!")
         }
         return token
     }
