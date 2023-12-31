@@ -40,7 +40,7 @@ class AuthenticationService(private val userRepository: UserRepository,
                                 authorities = setOf(userRole),
                                 isEnabled = true))
 
-        return RegisterResponse(username = addedUser.username, email = addedUser.email)
+        return RegisterResponse(userId = addedUser.userId, username = addedUser.username, email = addedUser.email)
 
     }
 
