@@ -26,11 +26,14 @@ class DatabaseConfiguration(private val roleRepository: RoleRepository,
             roleRepository.saveAll(roles)
 
             val adminRole = roles.first { it.authority == "ADMIN" }
-            val adminUser = ApplicationUser(username = "admin",
-                                            password = passwordEncoder.encode("password"),
-                                            authorities = setOf(adminRole),
-                                            email = "m.ahmed.abutalib@gmail.com",
-                                            isEnabled = true)
+            val adminUser = ApplicationUser(
+                    firstName = "Muhammad",
+                    lastName = "Ahmed",
+                    username = "admin",
+                    password = passwordEncoder.encode("password"),
+                    authorities = setOf(adminRole),
+                    email = "m.ahmed.abutalib@gmail.com",
+                    isEnabled = true)
             userRepository.save(adminUser)
         }
     }

@@ -10,6 +10,8 @@ class ApplicationUser(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "user_id") val userId: Int = 0,
         @Column(unique = true)
         private val username: String,
+        private val firstName: String,
+        private val lastName: String,
         private val password: String,
         val email: String,
         @ManyToMany(fetch = FetchType.EAGER)

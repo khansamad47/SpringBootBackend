@@ -1,5 +1,6 @@
 package com.syphyr.ourlittleones.backend.services
 
+import com.syphyr.ourlittleones.backend.dtos.response.UserResponse
 import com.syphyr.ourlittleones.backend.repositories.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -13,5 +14,14 @@ class UserService(private val userRepository: UserRepository) : UserDetailsServi
     override fun loadUserByUsername(username: String): UserDetails {
         return userRepository.findUserByUsername(username)
                 .orElseThrow { UsernameNotFoundException("user is not valid") }
+    }
+
+    fun getAuthenticatedUser(username: String): UserResponse {
+        val user = userRepository.findUserByUsername(username).orElseThrow {
+            UsernameNotFoundException("user is not valid")
+        }
+
+       return UserResponse(userId = user.userId, username = user.username, email = user.email,
+                     roles = user.authorities.joinToString { it.authority })
     }
 }

@@ -17,10 +17,13 @@ class AuthenticationController(private val authenticationService: Authentication
     @PostMapping("/register")
     fun registerUser(@RequestBody registerPayload: RegisterPayload): ResponseEntity<*> {
         return authenticationService
-                .registerUser(username = registerPayload.username,
-                              password = registerPayload.password,
-                              email = registerPayload.email,
-                              role = registerPayload.role)
+                .registerUser(
+                        firstName = registerPayload.firstName,
+                        lastName = registerPayload.lastName,
+                        username = registerPayload.username,
+                        password = registerPayload.password,
+                        email = registerPayload.email,
+                        role = registerPayload.role)
                 .toResponseEntity()
 
     }

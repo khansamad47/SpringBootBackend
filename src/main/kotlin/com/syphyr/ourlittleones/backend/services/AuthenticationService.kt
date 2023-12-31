@@ -22,14 +22,19 @@ class AuthenticationService(private val userRepository: UserRepository,
                             private val passwordEncoder: PasswordEncoder) {
 
 
-    fun registerUser(username: String,
-                     password: String,
-                     email: String,
-                     role: String): RegisterResponse {
+    fun registerUser(
+            firstName: String,
+            lastName: String,
+            username: String,
+            password: String,
+            email: String,
+            role: String): RegisterResponse {
         val encodedPassword = passwordEncoder.encode(password)
         val userRole = roleRepository.findByAuthority(role).get()
         val addedUser = userRepository.save(
-                ApplicationUser(username = username,
+                ApplicationUser(firstName = firstName,
+                                lastName = lastName,
+                                username = username,
                                 password = encodedPassword,
                                 email = email,
                                 authorities = setOf(userRole),
