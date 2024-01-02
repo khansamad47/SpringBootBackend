@@ -31,7 +31,7 @@ class AuthenticationController(private val authenticationService: Authentication
     @PostMapping("/authenticate")
     fun authenticate(@RequestBody authenticatePayload: AuthenticatePayload): ResponseEntity<*> {
         return authenticationService
-                .login(
+                .authenticate(
                         username = authenticatePayload.username,
                         password = authenticatePayload.password,
                 )

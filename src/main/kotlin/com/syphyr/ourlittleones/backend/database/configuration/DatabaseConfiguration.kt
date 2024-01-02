@@ -33,6 +33,8 @@ class DatabaseConfiguration(private val roleRepository: RoleRepository,
                     password = passwordEncoder.encode("password"),
                     authorities = setOf(adminRole),
                     email = "m.ahmed.abutalib@gmail.com",
+                    accessToken = "",
+                    refreshToken = "",
                     isEnabled = true)
             userRepository.save(adminUser)
         }

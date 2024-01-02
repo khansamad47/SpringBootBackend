@@ -37,6 +37,8 @@ class AuthenticationService(private val userRepository: UserRepository,
                                 username = username,
                                 password = encodedPassword,
                                 email = email,
+                                accessToken = "",
+                                refreshToken = "",
                                 authorities = setOf(userRole),
                                 isEnabled = true))
 
@@ -45,11 +47,12 @@ class AuthenticationService(private val userRepository: UserRepository,
     }
 
 
-    fun login(username: String, password: String): TokenResponse {
+    fun authenticate(username: String, password: String): TokenResponse {
         authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, password))
         val user = userRepository.findUserByUsername(username).get()
         val token = tokenService.generateJwt(user)
         val refreshToken = refreshTokenService.generateRefreshToken(user)
+        userRepository.save(user.copy(accessToken = token, refreshToken = refreshToken.token))
         return TokenResponse(token = token, refreshToken = refreshToken.token)
     }
 

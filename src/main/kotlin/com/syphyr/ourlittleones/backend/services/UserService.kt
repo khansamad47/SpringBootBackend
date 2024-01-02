@@ -20,8 +20,11 @@ class UserService(private val userRepository: UserRepository) : UserDetailsServi
         val user = userRepository.findUserByUsername(username).orElseThrow {
             UsernameNotFoundException("user is not valid")
         }
-
-       return UserResponse(userId = user.userId, username = user.username, email = user.email,
-                     roles = user.authorities.joinToString { it.authority })
+        return UserResponse(userId = user.userId,
+                            username = user.username,
+                            email = user.email,
+                            accessToken = user.accessToken,
+                            refreshToken = user.refreshToken,
+                            roles = user.authorities.joinToString { it.authority })
     }
 }
