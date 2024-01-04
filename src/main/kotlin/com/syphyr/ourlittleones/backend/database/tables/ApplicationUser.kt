@@ -12,8 +12,8 @@ data class ApplicationUser(
         val userId: Int = 0,
         @Column(unique = true)
         private val username: String,
-        private val firstName: String,
-        private val lastName: String,
+        val firstName: String,
+        val lastName: String,
         private val password: String,
         @Column(columnDefinition = "TEXT")
         val accessToken: String,

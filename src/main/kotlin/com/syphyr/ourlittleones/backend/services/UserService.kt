@@ -25,6 +25,8 @@ class UserService(private val userRepository: UserRepository) : UserDetailsServi
                             email = user.email,
                             accessToken = user.accessToken,
                             refreshToken = user.refreshToken,
+                            firstName = user.firstName,
+                            lastName = user.lastName,
                             roles = user.authorities.joinToString { it.authority })
     }
 }
