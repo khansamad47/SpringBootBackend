@@ -14,6 +14,7 @@ data class ApplicationUser(
         private val username: String,
         val firstName: String,
         val lastName: String,
+        val photoUrl: String,
         private val password: String,
         @Column(columnDefinition = "TEXT")
         val accessToken: String,

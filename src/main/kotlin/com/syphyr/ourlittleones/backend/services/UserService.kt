@@ -27,6 +27,7 @@ class UserService(private val userRepository: UserRepository) : UserDetailsServi
                             refreshToken = user.refreshToken,
                             firstName = user.firstName,
                             lastName = user.lastName,
+                            photoUrl = user.photoUrl,
                             roles = user.authorities.joinToString { it.authority })
     }
 }

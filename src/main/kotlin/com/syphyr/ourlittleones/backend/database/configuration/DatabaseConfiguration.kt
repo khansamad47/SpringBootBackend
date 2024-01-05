@@ -34,6 +34,7 @@ class DatabaseConfiguration(private val roleRepository: RoleRepository,
                     authorities = setOf(adminRole),
                     email = "m.ahmed.abutalib@gmail.com",
                     accessToken = "",
+                    photoUrl = "",
                     refreshToken = "",
                     isEnabled = true)
             userRepository.save(adminUser)

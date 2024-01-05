@@ -39,6 +39,7 @@ class AuthenticationService(private val userRepository: UserRepository,
                                 email = email,
                                 accessToken = "",
                                 refreshToken = "",
+                                photoUrl = "https://picsum.photos/500/500",
                                 authorities = setOf(userRole),
                                 isEnabled = true))
 
